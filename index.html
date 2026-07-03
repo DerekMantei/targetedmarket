@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>targeted market</title>
+<meta name="description" content="You are paid for the problems you solve.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#f4f1eb;--mu:#9a948a;--sub:#6b665e;--ac:#b08570;--line:#1d1d1d;--ff-mono:"Space Mono",ui-monospace,Menlo,Courier,monospace;--ff-wm:"Jost",ui-sans-serif,system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--ff-mono);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--ac);color:#000}
+a{color:inherit;text-decoration:none}
+em,i{font-style:italic;color:var(--ac)}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.05;z-index:50;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");animation:grain 8s steps(10) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,-2%)}30%{transform:translate(2%,3%)}50%{transform:translate(-2%,1%)}70%{transform:translate(3%,-3%)}90%{transform:translate(-1%,2%)}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+/* top bar */
+.bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em}
+.wm{font-family:var(--ff-wm);font-weight:400;letter-spacing:.14em;font-size:14px}
+.wm .bk{color:var(--ac)}
+.bar nav{display:flex;gap:18px;text-transform:lowercase}
+.bar nav a{color:var(--mu);transition:color .2s}
+.bar nav a:hover{color:var(--ink)}
+.bar .cta{color:var(--ac);border:1px solid var(--ac);padding:6px 14px;transition:all .2s}
+.bar .cta:hover{background:var(--ac);color:#000}
+/* marquee */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-size:11px;letter-spacing:.22em;color:var(--sub);text-transform:uppercase;white-space:nowrap}
+.marquee-inner{display:inline-block;animation:mq 28s linear infinite;padding-right:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:80px}
+.hero .tag{font-size:11px;letter-spacing:.28em;color:var(--sub);text-transform:uppercase;margin-bottom:26px}
+.hero .tag .live{color:var(--ac);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(38px,8.5vw,96px);line-height:.98;font-weight:700;letter-spacing:-.02em;text-transform:lowercase}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:inline-block;transform:translateY(110%);animation:rise .9s cubic-bezier(.19,1,.22,1) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.12s}
+.hero h1 .ln:nth-child(3) span{animation-delay:.24s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{margin-top:30px;max-width:560px;color:var(--mu);font-size:15px}
+.hero .actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 28px;font-family:var(--ff-mono);font-size:13px;letter-spacing:.06em;border:1px solid var(--ink);cursor:pointer;transition:all .2s;background:transparent;color:var(--ink)}
+.btn:hover{background:var(--ink);color:#000}
+.btn.ac{border-color:var(--ac);color:var(--ac)}
+.btn.ac:hover{background:var(--ac);color:#000}
+/* ticker */
+.ticker{position:absolute;bottom:0;left:0;right:0;border-top:1px solid var(--line);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mu)}
+.ticker .tk{min-height:1.4em}
+.ticker .tk b{color:var(--ink);font-weight:700}
+.ticker .tk .loss{color:var(--ac)}
+.ticker .idx{color:var(--sub);letter-spacing:.2em}
+/* sections */
+section{padding:110px 0;border-top:1px solid var(--line)}
+.no{font-size:11px;letter-spacing:.3em;color:var(--sub);text-transform:uppercase;margin-bottom:22px}
+.no b{color:var(--ac);font-weight:400}
+h2{font-size:clamp(28px,5vw,52px);line-height:1.05;font-weight:700;letter-spacing:-.01em;text-transform:lowercase;max-width:720px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.19,1,.22,1),transform .8s cubic-bezier(.19,1,.22,1)}
+.rv.in{opacity:1;transform:none}
+.thesis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);margin-top:54px;border:1px solid var(--line)}
+.thesis-grid .cell{background:var(--bg);padding:30px}
+.cell h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+.cell p{color:var(--mu);font-size:14px}
+.cell .big{display:block;font-size:34px;color:var(--ink);font-weight:700;margin-bottom:10px}
+/* counter strip */
+.count-strip{display:flex;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px;flex-wrap:wrap}
+.count-strip .c{flex:1 1 200px;background:var(--bg);padding:28px;text-align:left}
+.count-strip .c .v{font-size:40px;font-weight:700;color:var(--ink)}
+.count-strip .c .v i{font-style:normal;color:var(--ac)}
+.count-strip .c .l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-top:8px}
+/* optin */
+.optin{max-width:640px}
+.optin .lot{font-size:11px;letter-spacing:.24em;color:var(--sub);text-transform:uppercase;margin:26px 0 34px}
+.field{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.field input{background:transparent;border:1px solid var(--line);border-bottom:1px solid var(--sub);color:var(--ink);font-family:var(--ff-mono);font-size:15px;padding:16px;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--ac)}
+.field input::placeholder{color:var(--sub)}
+.fine{font-size:11px;color:var(--sub);letter-spacing:.06em;margin-top:18px;text-transform:uppercase}
+.success{display:none;border:1px solid var(--ac);padding:26px;color:var(--ac);font-size:15px}
+.hp{position:absolute;left:-9999px;opacity:0}
+/* program card */
+.program{border:1px solid var(--line);padding:44px;margin-top:54px;position:relative;overflow:hidden;transition:border-color .3s}
+.program:hover{border-color:var(--ac)}
+.program .sweep{position:absolute;top:0;left:-100%;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--ac),transparent);animation:sweep 3.4s ease-in-out infinite}
+@keyframes sweep{to{left:140%}}
+.program h3{font-size:24px;font-weight:700;text-transform:lowercase;margin-bottom:12px}
+.program p{color:var(--mu);max-width:560px;margin-bottom:26px}
+footer{border-top:1px solid var(--line);padding:36px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--sub);letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .hero h1 .ln span{transform:none}
+  .rv{opacity:1;transform:none}
+}
+@media(max-width:640px){.bar nav{display:none}.program{padding:28px}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="wm" href="/"><span class="bk">[</span>targeted market<span class="bk">]</span></a>
+  <nav>
+    <a href="#thesis">thesis</a>
+    <a href="#free">processing 101</a>
+    <a href="/apply">the program</a>
+  </nav>
+  <a class="cta" href="/apply">acquire / $49</a>
+</header>
+
+<main class="hero wrap">
+  <p class="tag"><span class="live">●</span>&nbsp;DROP 001 &nbsp;/&nbsp; SS 26 &nbsp;/&nbsp; ARIZONA</p>
+  <h1 aria-label="every swipe has a cost">
+    <span class="ln"><span>every swipe</span></span>
+    <span class="ln"><span>has a <em>cost.</em></span></span>
+  </h1>
+  <p class="sub">every business that takes a card loses 1 to 3 percent, hidden by design. find it. fix it. collect 1 percent of every transaction — forever.</p>
+  <div class="actions">
+    <a class="btn ac" href="/apply">open the file</a>
+    <a class="btn" href="#free">free training</a>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <span class="tk" id="tk"></span>
+    <span class="idx">LIVE / FEE WATCH</span>
+  </div>
+</main>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-inner" id="mq">DROP 001 &nbsp;·&nbsp; SS 26 / ARIZONA &nbsp;·&nbsp; PROCESSING 101 &nbsp;·&nbsp; YOU ARE PAID FOR THE PROBLEMS YOU SOLVE &nbsp;·&nbsp; 1% OF EVERY TRANSACTION &nbsp;·&nbsp; </div></div>
+
+<section id="thesis" class="wrap">
+  <p class="no rv"><b>NO 01</b> &nbsp;thesis</p>
+  <h2 class="rv">find the <em>money.</em> fix it. get paid forever.</h2>
+  <div class="thesis-grid rv">
+    <div class="cell"><h3>the problem</h3><span class="big" data-count="12000" data-prefix="$">$0</span><p>a $50k / mo merchant pays about $1,000 a month in fees the statement is built to hide. that is $12,000 a year.</p></div>
+    <div class="cell"><h3>the solve</h3><span class="big">~$50 flat</span><p>dual pricing. legal. set up in one afternoon. their processing cost drops to about $50 a month.</p></div>
+    <div class="cell"><h3>the residual</h3><span class="big" data-count="500" data-prefix="$" data-suffix=" / mo">$0</span><p>about 1 percent of every transaction routes to you. one merchant. every month. forever.</p></div>
+  </div>
+  <div class="count-strip rv">
+    <div class="c"><div class="v"><i data-count="1">0</i> merchant</div><div class="l">~$500 / mo</div></div>
+    <div class="c"><div class="v"><i data-count="5">0</i> merchants</div><div class="l">~$2,500 / mo</div></div>
+    <div class="c"><div class="v"><i data-count="10">0</i> merchants</div><div class="l">~$5,000 / mo · illustrative</div></div>
+  </div>
+</section>
+
+<section id="free" class="wrap">
+  <p class="no rv"><b>NO 02</b> &nbsp;processing 101 / free</p>
+  <h2 class="rv">5 emails. how money <em>actually</em> moves.</h2>
+  <div class="optin rv">
+    <p class="lot">LOT 001 / 005 · FIVE LESSONS · BY EMAIL</p>
+    <form id="optin-form" name="processing101">
+      <p class="hp"><label>Don't fill: <input name="bot-field"></label></p>
+      
+      <div class="field">
+        <input type="text" name="name" placeholder="name" autocomplete="name">
+        <input type="email" name="email" placeholder="email" required autocomplete="email">
+        <button class="btn ac" type="submit">enter</button>
+      </div>
+    </form>
+    <div class="success" id="optin-success">you are in. lesson 1 is on its way.</div>
+    <p class="fine">free first lesson · no spam · educational · not financial advice</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="no rv"><b>NO 03</b> &nbsp;the program</p>
+  <div class="program rv">
+    <div class="sweep" aria-hidden="true"></div>
+    <h3>the agent program.</h3>
+    <p>9 modules. 38 lessons. the toolkit, the community, and the direct line. $49 / mo — cancel anytime.</p>
+    <a class="btn ac" href="/apply">open the file →</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 / targeted market / arizona</span>
+  <span>educational · income examples illustrative · not guaranteed</span>
+</footer>
+
+<script>
+/* ticker */
+(function(){
+  var rows=[
+    ['coffee shop','$18k / mo','<span class="loss">−$360 / mo in fees</span>'],
+    ['auto shop','$95k / mo','<span class="loss">−$1,900 / mo in fees</span>'],
+    ['med spa','$140k / mo','<span class="loss">−$2,800 / mo in fees</span>'],
+    ['restaurant','$120k / mo','<span class="loss">−$2,400 / mo in fees</span>'],
+    ['barbershop','$22k / mo','<span class="loss">−$440 / mo in fees</span>'],
+    ['contractor','$210k / mo','<span class="loss">−$4,200 / mo in fees</span>'],
+    ['food truck','$14k / mo','<span class="loss">−$280 / mo in fees</span>']
+  ];
+  var el=document.getElementById('tk'),i=0;
+  function show(){var r=rows[i%rows.length];el.innerHTML='<b>'+r[0]+'</b> · '+r[1]+' volume · '+r[2];i++;}
+  show();setInterval(show,2600);
+})();
+/* marquee duplication */
+(function(){var m=document.getElementById('mq');m.innerHTML=m.innerHTML+m.innerHTML;})();
+/* reveals + counters */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(run);
+      if(e.target.hasAttribute('data-count'))run(e.target);
+      io.unobserve(e.target);}
+  });},{threshold:.2});
+  document.querySelectorAll('.rv').forEach(function(n){io.observe(n)});
+  function run(n){
+    if(n.__done)return;n.__done=true;
+    var end=parseInt(n.getAttribute('data-count'),10),pre=n.getAttribute('data-prefix')||'',suf=n.getAttribute('data-suffix')||'';
+    var t0=null,dur=1400;
+    function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);p=1-Math.pow(1-p,3);
+      n.textContent=pre+Math.round(end*p).toLocaleString()+suf;
+      if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+})();
+/* opt-in: MailerLite capture (drip) */
+(function(){
+  var f=document.getElementById('optin-form');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var fd=new FormData(f);
+    if(fd.get('bot-field')){return;}
+    var email=fd.get('email'),name=fd.get('name')||'';
+    var btn=f.querySelector('button');btn.disabled=true;btn.textContent='…';
+    /* 1. MailerLite — triggers Processing 101 drip */
+    var ml=new URLSearchParams();ml.set('fields[email]',email);ml.set('fields[name]',name);ml.set('ml-submit','1');ml.set('anticsrf','true');
+    var p1=fetch('https://assets.mailerlite.com/jsonp/2405457/forms/189307072349734556/subscribe',{method:'POST',body:ml}).catch(function(){});
+    Promise.all([p1]).then(function(){
+      f.style.display='none';
+      document.getElementById('optin-success').style.display='block';
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>targeted market / agent program</title>
+<meta name="description" content="Real payment-processing agent training. 9 modules, 38 lessons, working toolkit, community. Arizona.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#f4f1eb;--mu:#9a948a;--sub:#6b665e;--ac:#b08570;--line:#1d1d1d;--ff-mono:"Space Mono",ui-monospace,Menlo,Courier,monospace;--ff-wm:"Jost",ui-sans-serif,system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--ff-mono);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--ac);color:#000}
+a{color:inherit;text-decoration:none}
+em,i{font-style:italic;color:var(--ac)}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.05;z-index:50;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");animation:grain 8s steps(10) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,-2%)}30%{transform:translate(2%,3%)}50%{transform:translate(-2%,1%)}70%{transform:translate(3%,-3%)}90%{transform:translate(-1%,2%)}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em}
+.wm{font-family:var(--ff-wm);font-weight:400;letter-spacing:.14em;font-size:14px}
+.wm .bk{color:var(--ac)}
+.bar nav{display:flex;gap:18px;text-transform:lowercase}
+.bar nav a{color:var(--mu);transition:color .2s}
+.bar nav a:hover{color:var(--ink)}
+.bar .cta{color:var(--ac);border:1px solid var(--ac);padding:6px 14px;transition:all .2s}
+.bar .cta:hover{background:var(--ac);color:#000}
+.btn{display:inline-block;padding:14px 28px;font-family:var(--ff-mono);font-size:13px;letter-spacing:.06em;border:1px solid var(--ink);cursor:pointer;transition:all .2s;background:transparent;color:var(--ink)}
+.btn:hover{background:var(--ink);color:#000}
+.btn.ac{border-color:var(--ac);color:var(--ac)}
+.btn.ac:hover{background:var(--ac);color:#000}
+.hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px;position:relative}
+.hero .tag{font-size:11px;letter-spacing:.28em;color:var(--sub);text-transform:uppercase;margin-bottom:26px}
+.hero .tag .live{color:var(--ac);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(40px,9vw,104px);line-height:.96;font-weight:700;letter-spacing:-.02em;text-transform:lowercase}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:inline-block;transform:translateY(110%);animation:rise .9s cubic-bezier(.19,1,.22,1) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .sub{margin-top:28px;max-width:620px;color:var(--mu)}
+.hero .actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:56px;font-size:12px}
+.meta div{background:var(--bg);padding:16px 18px}
+.meta .k{color:var(--sub);letter-spacing:.2em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:4px}
+section{padding:110px 0;border-top:1px solid var(--line)}
+.no{font-size:11px;letter-spacing:.3em;color:var(--sub);text-transform:uppercase;margin-bottom:22px}
+.no b{color:var(--ac);font-weight:400}
+h2{font-size:clamp(28px,5vw,52px);line-height:1.05;font-weight:700;letter-spacing:-.01em;text-transform:lowercase;max-width:760px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.19,1,.22,1),transform .8s cubic-bezier(.19,1,.22,1)}
+.rv.in{opacity:1;transform:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+.grid .cell{background:var(--bg);padding:30px}
+.cell h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+.cell p{color:var(--mu);font-size:14px}
+.cell .big{display:block;font-size:32px;color:var(--ink);font-weight:700;margin-bottom:10px}
+blockquote{border-left:2px solid var(--ac);padding:18px 26px;margin:44px 0;color:var(--ink);font-size:17px;font-style:italic;max-width:680px}
+.fine{font-size:11px;color:var(--sub);letter-spacing:.04em;margin-top:20px;max-width:640px;text-transform:uppercase}
+/* calculator */
+.calc{border:1px solid var(--line);padding:40px;margin-top:54px;position:relative;overflow:hidden}
+.calc .sweep{position:absolute;top:0;left:-100%;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--ac),transparent);animation:sweep 3.4s ease-in-out infinite}
+@keyframes sweep{to{left:140%}}
+.calc .lot{font-size:11px;letter-spacing:.24em;color:var(--sub);text-transform:uppercase;margin-bottom:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.calc label{display:block;font-size:12px;color:var(--mu);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.calc .vol{font-size:clamp(30px,5vw,46px);font-weight:700;color:var(--ink);margin-bottom:18px}
+input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:2px;background:var(--line);outline:none;margin:8px 0 34px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--ac);cursor:pointer;border-radius:0}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--ac);cursor:pointer;border-radius:0;border:none}
+.calc .rows{border-top:1px solid var(--line)}
+.calc .row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--mu)}
+.calc .row b{color:var(--ink);font-weight:700}
+.calc .row.total{font-size:17px;color:var(--ink)}
+.calc .row.total b{color:var(--ac);font-size:24px}
+.calc .scale{margin-top:22px;font-size:13px;color:var(--mu)}
+.calc .scale b{color:var(--ac)}
+/* method */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px;counter-reset:step}
+.steps .st{background:var(--bg);padding:32px}
+.st .n{font-size:12px;color:var(--sub);margin-bottom:16px}
+.st h3{font-size:19px;font-weight:700;text-transform:lowercase;margin-bottom:10px}
+.st p{color:var(--mu);font-size:14px}
+.st .t{display:inline-block;margin-top:18px;font-size:10px;letter-spacing:.22em;color:var(--ac);text-transform:uppercase;border:1px solid var(--line);padding:5px 10px}
+/* modules */
+.mods{margin-top:54px;border-top:1px solid var(--line)}
+.mod{display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);transition:padding-left .25s}
+.mod:hover{padding-left:12px}
+.mod .mn{color:var(--sub);font-size:13px}
+.mod h3{font-size:18px;font-weight:700;text-transform:lowercase}
+.mod p{color:var(--mu);font-size:13px;margin-top:4px}
+.mod .lots{font-size:10px;letter-spacing:.2em;color:var(--sub);text-transform:uppercase;white-space:nowrap}
+/* pricing */
+.editions{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+.ed{background:var(--bg);padding:36px;display:flex;flex-direction:column;gap:8px}
+.ed.hot{outline:1px solid var(--ac);outline-offset:-1px}
+.ed .en{font-size:11px;letter-spacing:.22em;color:var(--sub);text-transform:uppercase}
+.ed .pr{font-size:42px;font-weight:700;margin:6px 0}
+.ed .pr small{font-size:14px;color:var(--mu);font-weight:400}
+.ed ul{list-style:none;margin:16px 0 24px;color:var(--mu);font-size:13px;display:flex;flex-direction:column;gap:9px}
+.ed ul li::before{content:"— ";color:var(--ac)}
+.ed .btn{margin-top:auto;text-align:center}
+/* payout table */
+.pay{margin-top:54px;border-top:1px solid var(--line)}
+.pr-row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.pr-row .tag2{font-size:10px;letter-spacing:.2em;color:var(--ac);text-transform:uppercase;min-width:130px}
+.pr-row .cat{font-size:17px;font-weight:700;text-transform:lowercase}
+.pr-row .vol2{color:var(--mu);font-size:13px;white-space:nowrap}
+/* scaling */
+.scale-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+.sc{background:var(--bg);padding:34px}
+.sc .v{font-size:44px;font-weight:700;color:var(--ink)}
+.sc .v i{font-style:normal;color:var(--ac)}
+.sc .k{font-size:11px;letter-spacing:.2em;color:var(--sub);text-transform:uppercase;margin-top:8px}
+.sc p{color:var(--mu);font-size:13px;margin-top:12px}
+/* author */
+.author{max-width:760px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.badges span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);border:1px solid var(--line);padding:7px 13px}
+/* close */
+.close-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:54px 0;font-size:12px}
+.close-meta div{background:var(--bg);padding:16px 18px}
+.close-meta .k{color:var(--sub);letter-spacing:.2em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:4px}
+footer{border-top:1px solid var(--line);padding:36px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--sub);letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .hero h1 .ln span{transform:none}
+  .rv{opacity:1;transform:none}
+}
+@media(max-width:640px){.bar nav{display:none}.calc{padding:26px}.mod{grid-template-columns:44px 1fr}.mod .lots{display:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="wm" href="/"><span class="bk">[</span>targeted market<span class="bk">]</span></a>
+  <nav>
+    <a href="#thesis">thesis</a>
+    <a href="#math">the math</a>
+    <a href="#method">method</a>
+    <a href="#contents">contents</a>
+    <a href="#author">about</a>
+  </nav>
+  <a class="cta" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire / $49</a>
+</header>
+
+<main class="hero wrap">
+  <p class="tag">DROP 001 &nbsp;/&nbsp; SS 26 / ARIZONA &nbsp;&nbsp;<span class="live">●</span> live</p>
+  <h1>
+    <span class="ln"><span>the agent</span></span>
+    <span class="ln"><span><em>program.</em></span></span>
+  </h1>
+  <p class="sub">every business that swipes a card loses 1 to 3 percent that is hidden by design. show the owner. fix it with dual pricing. collect 1 percent of every transaction, every month, for as long as they process. arizona. $49 / mo.</p>
+  <div class="actions">
+    <a class="btn ac" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire / $49</a>
+    <a class="btn" href="#math">see the math</a>
+  </div>
+  <div class="meta">
+    <div><span class="k">subject</span>payment processing</div>
+    <div><span class="k">form</span>9 modules / toolkit / community</div>
+    <div><span class="k">author</span>derek mantei / agent</div>
+    <div><span class="k">edition</span>starter / annual / lifetime</div>
+  </div>
+</main>
+
+<section id="thesis" class="wrap">
+  <p class="no rv"><b>NO 01</b> &nbsp;thesis</p>
+  <h2 class="rv">find the money. <em>fix it.</em> get paid forever.</h2>
+  <div class="grid rv">
+    <div class="cell"><h3>the problem</h3><p>$50k / mo merchant pays ~$1,000 in fees. the statement is built so they cannot read it. that is $12,000 a year, paid in pieces to a bank, a network, and a processor most owners cannot name.</p></div>
+    <div class="cell"><h3>the solve</h3><p>dual pricing. legal. set up in one afternoon. their cost drops to ~$50 flat.</p></div>
+    <div class="cell"><h3>the residual</h3><p>1 percent of every transaction routes to you. one $50k merchant = ~$500 / mo. you do not return. you do not chase. you find the next merchant and you do it again.</p></div>
+  </div>
+</section>
+
+<section id="math" class="wrap">
+  <p class="no rv"><b>NO 02</b> &nbsp;arithmetic</p>
+  <h2 class="rv">do the <em>math.</em></h2>
+  <p class="rv" style="margin-top:26px;max-width:680px;color:var(--mu)">ask for the statement. divide total fees by total volume. that is the real rate. show them what they pay. show them what they would pay with dual pricing. they decide.</p>
+  <blockquote class="rv">"$50k / mo merchant. $1,000 in fees. dual pricing → $50 flat. they save $950. i earn $500 / mo forever. one afternoon."</blockquote>
+  <p class="fine rv">Illustrative example of how the model works. Not a promise of earnings. Actual residuals depend on the merchants you board, their volume, approval, pricing, and your effort. Results vary.</p>
+
+  <div class="calc rv">
+    <div class="sweep" aria-hidden="true"></div>
+    <p class="lot"><span>residual calculator</span><span>LOT 002 / 005</span></p>
+    <label for="vol">monthly card volume</label>
+    <div class="vol" id="volOut">$50,000</div>
+    <input type="range" id="vol" min="10000" max="400000" step="5000" value="50000" aria-label="monthly card volume">
+    <div class="rows">
+      <div class="row"><span>old network fees (~2%)</span><b id="oldFees">−$1,000</b></div>
+      <div class="row"><span>new flat monthly fee</span><b>$50</b></div>
+      <div class="row"><span>merchant saves / month</span><b id="saves">$950</b></div>
+      <div class="row total"><span>YOUR MONTHLY · PER MERCHANT (~1%)</span><b id="resid">$500</b></div>
+    </div>
+    <p class="scale">5 merchants → <b id="x5">$2,500/mo</b> · 10 merchants → <b id="x10">$5,000/mo</b><br>all running without you. illustrative.</p>
+  </div>
+</section>
+
+<section id="method" class="wrap">
+  <p class="no rv"><b>NO 03</b> &nbsp;method</p>
+  <h2 class="rv">60 seconds. one afternoon. <em>forever.</em></h2>
+  <div class="steps rv">
+    <div class="st"><div class="n">01</div><h3>find the merchant.</h3><p>read the statement. compute the effective rate. prove the loss.</p><span class="t">60 seconds</span></div>
+    <div class="st"><div class="n">02</div><h3>install dual pricing.</h3><p>processing cost → ~$50 flat. submit the application. ship the terminal.</p><span class="t">one afternoon</span></div>
+    <div class="st"><div class="n">03</div><h3>collect.</h3><p>1 percent of monthly volume routes to you. every month it processes. you never go back. you board the next one.</p><span class="t">forever</span></div>
+  </div>
+</section>
+
+<section id="struct" class="wrap">
+  <p class="no rv"><b>NO 04</b> &nbsp;structure</p>
+  <h2 class="rv">1 percent of every card. <em>every month.</em></h2>
+  <div class="grid rv">
+    <div class="cell"><h3>per transaction</h3><span class="big">~1%</span><p>routes to you. set up once at boarding.</p></div>
+    <div class="cell"><h3>recurring</h3><span class="big">monthly</span><p>paid every month the account processes. forever.</p></div>
+    <div class="cell"><h3>10 merchants</h3><span class="big">~$5k</span><p>each at $50k volume. work done once. illustrative.</p></div>
+  </div>
+</section>
+
+<section id="contents" class="wrap">
+  <p class="no rv"><b>NO 05</b> &nbsp;contents</p>
+  <h2 class="rv">9 modules. 38 lessons. <em>one job.</em></h2>
+  <p class="rv" style="margin-top:20px;color:var(--sub);font-size:11px;letter-spacing:.24em;text-transform:uppercase">agent training / drop 001</p>
+  <div class="mods rv">
+    <div class="mod"><span class="mn">00</span><div><h3>start here.</h3><p>your first 7 days.</p></div><span class="lots">4 lots</span></div>
+    <div class="mod"><span class="mn">01</span><div><h3>how payments move.</h3><p>tap → processor → network → bank → settlement.</p></div><span class="lots">3 lots</span></div>
+    <div class="mod"><span class="mn">02</span><div><h3>how agents get paid.</h3><p>residuals. basis points. what an account is worth.</p></div><span class="lots">4 lots</span></div>
+    <div class="mod"><span class="mn">03</span><div><h3>merchant pain points.</h3><p>6 reasons businesses switch. 6 openings.</p></div><span class="lots">6 lots</span></div>
+    <div class="mod"><span class="mn">04</span><div><h3>dual pricing.</h3><p>plain english. legal where disclosed. what not to promise.</p></div><span class="lots">4 lots</span></div>
+    <div class="mod"><span class="mn">05</span><div><h3>statement review.</h3><p>effective rate. junk fees. read it out loud.</p></div><span class="lots">5 lots</span></div>
+    <div class="mod"><span class="mn">06</span><div><h3>outreach.</h3><p>walk-in. cold dm. phone. handle the first no.</p></div><span class="lots">4 lots</span></div>
+    <div class="mod"><span class="mn">07</span><div><h3>closing.</h3><p>the 60 second pitch. the objections.</p></div><span class="lots">4 lots</span></div>
+    <div class="mod"><span class="mn">08</span><div><h3>onboarding.</h3><p>application. install. test transaction. 30 day follow-up.</p></div><span class="lots">4 lots</span></div>
+  </div>
+
+  <div class="editions rv">
+    <div class="ed hot">
+      <span class="en">the edition · DROP 001</span>
+      <div class="pr">$49<small>/mo</small></div>
+      <span class="en">agent starter · cancel anytime</span>
+      <ul>
+        <li>9 modules / 38 written lessons</li>
+        <li>agent toolkit / 6 working files</li>
+        <li>community / 6 channels</li>
+        <li>direct line to an active agent</li>
+        <li>about 1% residual per transaction</li>
+        <li>updates included</li>
+      </ul>
+      <a class="btn ac" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire / $49 / mo</a>
+    </div>
+    <div class="ed">
+      <span class="en">agent annual · saves $191 vs monthly</span>
+      <div class="pr">$397<small>/yr</small></div>
+      <ul>
+        <li>everything in starter</li>
+        <li>12 months locked</li>
+      </ul>
+      <a class="btn" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire annual</a>
+    </div>
+    <div class="ed">
+      <span class="en">founding lifetime · limited / early group</span>
+      <div class="pr">$497<small> once</small></div>
+      <ul>
+        <li>everything, forever</li>
+        <li>founding member badge</li>
+      </ul>
+      <a class="btn" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire lifetime</a>
+    </div>
+  </div>
+  <p class="fine rv">Cancel anytime. Earnings not guaranteed. Results depend on effort, market, sales skill, business approval, and applicable law.</p>
+</section>
+
+<section id="cats" class="wrap">
+  <p class="no rv"><b>NO 06</b> &nbsp;payout</p>
+  <h2 class="rv">where the <em>money is.</em></h2>
+  <div class="pay rv">
+    <div class="pr-row"><span class="tag2">high volume</span><span class="cat">restaurants</span><span class="vol2">$80k–200k / mo</span></div>
+    <div class="pr-row"><span class="tag2">high ticket</span><span class="cat">auto services</span><span class="vol2">$50k–150k / mo</span></div>
+    <div class="pr-row"><span class="tag2">premium</span><span class="cat">med spa / dental</span><span class="vol2">$80k–250k / mo</span></div>
+    <div class="pr-row"><span class="tag2">high value</span><span class="cat">contractors</span><span class="vol2">$100k–400k / mo</span></div>
+    <div class="pr-row"><span class="tag2">recurring</span><span class="cat">fitness studios</span><span class="vol2">$30k–80k / mo</span></div>
+    <div class="pr-row"><span class="tag2">dense footprint</span><span class="cat">retail shops</span><span class="vol2">$20k–60k / mo</span></div>
+    <div class="pr-row"><span class="tag2">repeatable</span><span class="cat">salons / barbers</span><span class="vol2">$15k–40k / mo</span></div>
+    <div class="pr-row"><span class="tag2">mobile</span><span class="cat">food trucks</span><span class="vol2">$10k–35k / mo</span></div>
+  </div>
+</section>
+
+<section id="scaling" class="wrap">
+  <p class="no rv"><b>NO 07</b> &nbsp;scaling</p>
+  <h2 class="rv">stack accounts. <em>stack income.</em></h2>
+  <div class="scale-grid rv">
+    <div class="sc"><div class="v"><i data-count="1">0</i> account</div><div class="k">~$500</div><p>$50k / mo merchant. illustrative.</p></div>
+    <div class="sc"><div class="v"><i data-count="5">0</i> accounts</div><div class="k">~$2,500</div><p>same number, five times over.</p></div>
+    <div class="sc"><div class="v"><i data-count="10">0</i> accounts</div><div class="k">~$5,000</div><p>work done once. paid forever.</p></div>
+  </div>
+</section>
+
+<section id="author" class="wrap">
+  <p class="no rv"><b>NO 08</b> &nbsp;author</p>
+  <h2 class="rv">built by an <em>agent.</em></h2>
+  <div class="author rv">
+    <p style="margin-top:26px;color:var(--mu)">derek. 21. scottsdale. inside payment infrastructure since 18. 2 terminals i installed myself pay me ~$1,000 / mo. for work i did once, in one afternoon, in the same arizona summer. that is not a pitch. that is my statement.</p>
+    <blockquote>"i see what the statement hides. i will show you the same view."</blockquote>
+    <div class="badges"><span>arizona</span><span>active agent</span><span>finance since 18</span><span>scottsdale</span></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="no rv"><b>NO 09</b> &nbsp;close</p>
+  <h2 class="rv">two paths. <em>pick one.</em></h2>
+  <p class="rv" style="margin-top:26px;max-width:700px;color:var(--mu)">every business you walk past pays $12,000 a year in card fees they cannot see. you can keep walking past. or you can learn to spot it, fix it, and collect 1 percent forever. $49 / mo. cancel anytime.</p>
+  <div class="close-meta rv">
+    <div><span class="k">drop</span>001</div>
+    <div><span class="k">season</span>ss 26</div>
+    <div><span class="k">arizona</span>scottsdale</div>
+    <div><span class="k">edition</span>$49 / $397 / $497</div>
+  </div>
+  <div class="rv" style="display:flex;gap:14px;flex-wrap:wrap">
+    <a class="btn ac" href="https://whop.com/targeted-market/operator-program-7e/" target="_blank" rel="noopener">acquire / $49 / mo</a>
+    <a class="btn" href="#method">see the method</a>
+  </div>
+</section>
+
+<footer>
+  <span><a class="wm" href="/"><span class="bk">[</span>targeted market<span class="bk">]</span></a></span>
+  <span><a href="#thesis">thesis</a> &nbsp; <a href="#math">math</a> &nbsp; <a href="#method">method</a> &nbsp; <a href="#contents">contents</a></span>
+  <span>© 2026 / arizona</span>
+</footer>
+
+<script>
+/* reveals + counters */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(run);
+      io.unobserve(e.target);}
+  });},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(n){io.observe(n)});
+  function run(n){
+    if(n.__done)return;n.__done=true;
+    var end=parseInt(n.getAttribute('data-count'),10);
+    var t0=null,dur=1200;
+    function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);p=1-Math.pow(1-p,3);
+      n.textContent=Math.round(end*p).toLocaleString();
+      if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+})();
+/* calculator */
+(function(){
+  var vol=document.getElementById('vol');
+  var f=function(n){return '$'+Math.round(n).toLocaleString()};
+  function upd(){
+    var v=+vol.value;
+    document.getElementById('volOut').textContent=f(v);
+    document.getElementById('oldFees').textContent='−'+f(v*.02);
+    document.getElementById('saves').textContent=f(v*.02-50);
+    document.getElementById('resid').textContent=f(v*.01);
+    document.getElementById('x5').textContent=f(v*.01*5)+'/mo';
+    document.getElementById('x10').textContent=f(v*.01*10)+'/mo';
+  }
+  vol.addEventListener('input',upd);upd();
+})();
+</script>
+</body>
+</html>
