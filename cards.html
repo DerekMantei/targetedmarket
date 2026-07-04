@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>tm / motion cards</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,700&family=Jost:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#f4f1eb;--mu:#9a948a;--sub:#6b665e;--ac:#b08570;--line:#1d1d1d;--good:#7da87d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace,monospace;overflow:hidden;height:100svh}
+.card{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:8vh 7vw;height:100svh}
+.card.on{display:flex}
+.wm{position:absolute;bottom:4vh;left:0;right:0;text-align:center;font-family:"Jost",sans-serif;font-size:13px;letter-spacing:.18em;color:var(--sub)}
+.wm b{color:var(--ac);font-weight:400}
+.tag{font-size:11px;letter-spacing:.3em;color:var(--sub);text-transform:uppercase;margin-bottom:4vh}
+.tag b{color:var(--ac);font-weight:400}
+.big{font-size:clamp(40px,11vw,92px);font-weight:700;line-height:1.02;text-transform:lowercase;letter-spacing:-.02em}
+.big em{font-style:italic;color:var(--ac)}
+.giant{font-size:clamp(80px,24vw,220px);font-weight:700;line-height:1;color:var(--ac);letter-spacing:-.03em}
+.mid{font-size:clamp(18px,4.5vw,30px);color:var(--mu);margin-top:3vh;line-height:1.5}
+.mid b{color:var(--ink)}
+.nav{position:fixed;top:3vh;right:5vw;z-index:9;font-size:11px;color:var(--sub);letter-spacing:.2em}
+/* c1 ticker */
+.t-row{font-size:clamp(20px,5vw,34px);color:var(--mu);margin-top:2.5vh;opacity:0;transform:translateY(16px);animation:tin .5s forwards}
+.t-row b{color:var(--ink)}
+.t-row .l{color:var(--ac)}
+@keyframes tin{to{opacity:1;transform:none}}
+/* c2 strike */
+.claim{font-size:clamp(60px,18vw,160px);font-weight:700;color:var(--mu);position:relative;display:inline-block}
+.claim::after{content:"";position:absolute;left:-4%;right:104%;top:52%;height:6px;background:var(--ac);animation:strike .6s 1.6s forwards}
+@keyframes strike{to{right:-4%}}
+.real{opacity:0;animation:tin .6s 2.4s forwards}
+/* c4 drop */
+.drop-old{font-size:clamp(60px,16vw,140px);font-weight:700;color:var(--ink)}
+.drop-new{font-size:clamp(70px,20vw,180px);font-weight:700;color:var(--good);opacity:0;animation:tin .7s 2s forwards}
+.arrow{font-size:clamp(30px,8vw,60px);color:var(--sub);margin:1vh 0;opacity:0;animation:tin .4s 1.4s forwards}
+/* c5 stack */
+.stack .s{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding:2.2vh 0;opacity:0;transform:translateY(14px)}
+.stack .s.in{animation:tin .5s forwards}
+.stack .n{font-size:clamp(20px,5vw,32px);color:var(--mu)}
+.stack .v{font-size:clamp(34px,9vw,64px);font-weight:700;color:var(--ac)}
+.disc{position:absolute;bottom:9vh;left:0;right:0;text-align:center;font-size:9px;letter-spacing:.14em;color:var(--sub);text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="nav" id="nav">1 / 5 · tap to switch</div>
+
+<!-- 1: every swipe has a cost -->
+<section class="card" data-c="1">
+  <p class="tag"><b>●</b> FEE WATCH / LIVE</p>
+  <h1 class="big">every swipe<br>has a <em>cost.</em></h1>
+  <div id="tick"></div>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<!-- 2: the real rate -->
+<section class="card" data-c="2">
+  <p class="tag">NO 02 / <b>the statement lies</b></p>
+  <p class="mid">what they think they pay</p>
+  <div class="claim">1.6%</div>
+  <div class="real">
+    <p class="mid">what the math says</p>
+    <div class="giant" id="rate2">0.00%</div>
+  </div>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<!-- 3: 12k a year -->
+<section class="card" data-c="3">
+  <p class="tag">NO 03 / <b>the leak</b></p>
+  <div class="giant" id="leak">$0</div>
+  <p class="mid">a year. in card fees.<br>hidden on purpose. <b>every business you walk past.</b></p>
+  <p class="disc">example: $50k/mo volume at ~2% · illustrative</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<!-- 4: dual pricing drop -->
+<section class="card" data-c="4">
+  <p class="tag">NO 04 / <b>the fix</b></p>
+  <p class="mid">processing cost / month</p>
+  <div class="drop-old" id="old4">$1,000</div>
+  <div class="arrow">↓ dual pricing</div>
+  <div class="drop-new">~$50 flat</div>
+  <p class="disc">legal where properly disclosed · same model as every gas station</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<!-- 5: the stack -->
+<section class="card" data-c="5">
+  <p class="tag">NO 05 / <b>the residual</b></p>
+  <h1 class="big">work once.<br><em>paid monthly.</em></h1>
+  <div class="stack" style="margin-top:4vh">
+    <div class="s"><span class="n">1 merchant</span><span class="v">~$500/mo</span></div>
+    <div class="s"><span class="n">5 merchants</span><span class="v">~$2,500/mo</span></div>
+    <div class="s"><span class="n">10 merchants</span><span class="v">~$5,000/mo</span></div>
+  </div>
+  <p class="disc">illustrative · results depend on effort · not guaranteed</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<script>
+var cur=1,max=5,timers=[];
+function clear(){timers.forEach(clearTimeout);timers=[];}
+function show(n){
+  clear();cur=n;
+  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('on')});
+  var card=document.querySelector('[data-c="'+n+'"]');
+  card.classList.add('on');
+  document.getElementById('nav').textContent=n+' / '+max+' · tap to switch';
+  if(n===1)c1();if(n===2)c2();if(n===3)c3();if(n===4)c4();if(n===5)c5();
+}
+function later(f,ms){timers.push(setTimeout(f,ms))}
+function count(el,end,pre,suf,dur,dec){
+  var t0=null;dec=dec||0;
+  function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);p=1-Math.pow(1-p,3);
+    el.textContent=pre+(end*p).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;
+    if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+/* card 1: ticker rows appear then loop */
+function c1(){
+  var rows=[["coffee shop","$18k/mo","−$360/mo"],["auto shop","$95k/mo","−$1,900/mo"],["med spa","$140k/mo","−$2,800/mo"],["barbershop","$22k/mo","−$440/mo"]];
+  var el=document.getElementById('tick');el.innerHTML='';
+  rows.forEach(function(r,i){
+    later(function(){
+      var d=document.createElement('div');d.className='t-row';
+      d.innerHTML='<b>'+r[0]+'</b> · '+r[1]+' · <span class="l">'+r[2]+'</span>';
+      el.appendChild(d);
+    },600+i*900);
+  });
+  later(function(){if(cur===1)c1()},600+rows.length*900+2500);
+}
+/* card 2 */
+function c2(){later(function(){count(document.getElementById('rate2'),2.31,'','%',1400,2)},2500);later(function(){if(cur===2)c2()},7500);}
+/* card 3 */
+function c3(){later(function(){count(document.getElementById('leak'),12000,'$','',1800)},400);later(function(){if(cur===3)c3()},6500);}
+/* card 4 */
+function c4(){later(function(){if(cur===4)c4()},6500);}
+/* card 5 */
+function c5(){
+  document.querySelectorAll('.stack .s').forEach(function(s,i){
+    s.classList.remove('in');void s.offsetWidth;
+    later(function(){s.classList.add('in')},700+i*900);
+  });
+  later(function(){if(cur===5)c5()},700+3*900+3000);
+}
+document.body.addEventListener('click',function(){show(cur%max+1)});
+window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1));if(n>=1&&n<=max)show(n)});
+show(parseInt(location.hash.slice(1))||1);
+</script>
+</body>
+</html>
