@@ -24,32 +24,59 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace
 .mid{font-size:clamp(18px,4.5vw,30px);color:var(--mu);margin-top:3vh;line-height:1.5}
 .mid b{color:var(--ink)}
 .nav{position:fixed;top:3vh;right:5vw;z-index:9;font-size:11px;color:var(--sub);letter-spacing:.2em}
-/* c1 ticker */
 .t-row{font-size:clamp(20px,5vw,34px);color:var(--mu);margin-top:2.5vh;opacity:0;transform:translateY(16px);animation:tin .5s forwards}
 .t-row b{color:var(--ink)}
 .t-row .l{color:var(--ac)}
 @keyframes tin{to{opacity:1;transform:none}}
-/* c2 strike */
 .claim{font-size:clamp(60px,18vw,160px);font-weight:700;color:var(--mu);position:relative;display:inline-block}
 .claim::after{content:"";position:absolute;left:-4%;right:104%;top:52%;height:6px;background:var(--ac);animation:strike .6s 1.6s forwards}
 @keyframes strike{to{right:-4%}}
 .real{opacity:0;animation:tin .6s 2.4s forwards}
-/* c4 drop */
 .drop-old{font-size:clamp(60px,16vw,140px);font-weight:700;color:var(--ink)}
 .drop-new{font-size:clamp(70px,20vw,180px);font-weight:700;color:var(--good);opacity:0;animation:tin .7s 2s forwards}
 .arrow{font-size:clamp(30px,8vw,60px);color:var(--sub);margin:1vh 0;opacity:0;animation:tin .4s 1.4s forwards}
-/* c5 stack */
 .stack .s{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding:2.2vh 0;opacity:0;transform:translateY(14px)}
 .stack .s.in{animation:tin .5s forwards}
 .stack .n{font-size:clamp(20px,5vw,32px);color:var(--mu)}
 .stack .v{font-size:clamp(34px,9vw,64px);font-weight:700;color:var(--ac)}
 .disc{position:absolute;bottom:9vh;left:0;right:0;text-align:center;font-size:9px;letter-spacing:.14em;color:var(--sub);text-transform:uppercase}
+/* method steps */
+.mstep{border-left:2px solid var(--line);padding:2.4vh 0 2.4vh 5vw;opacity:0;transform:translateX(-14px)}
+.mstep.in{animation:min2 .55s forwards}
+@keyframes min2{to{opacity:1;transform:none}}
+.mstep .mn{font-size:11px;letter-spacing:.26em;color:var(--ac);text-transform:uppercase}
+.mstep h2{font-size:clamp(26px,7vw,52px);font-weight:700;text-transform:lowercase;line-height:1.05}
+.mstep .mt{font-size:clamp(13px,3vw,17px);color:var(--sub);margin-top:.6vh}
+/* envelope */
+.env{display:flex;gap:2.5vw;margin-top:4vh}
+.env .e{width:clamp(34px,9vw,64px);height:clamp(24px,6.5vw,46px);border:1.5px solid var(--sub);position:relative;opacity:0;transform:translateY(12px)}
+.env .e.in{animation:tin .45s forwards}
+.env .e::after{content:"";position:absolute;inset:0;border-bottom:1.5px solid var(--sub);transform:scaleY(.5);transform-origin:top}
+.env .e.hot{border-color:var(--ac)}
+.env .e.hot::after{border-color:var(--ac)}
+/* typing */
+.type{font-size:clamp(30px,8vw,60px);font-weight:700;color:var(--ink);border-bottom:2px solid var(--sub);display:inline-block;min-height:1.3em;min-width:60%}
+.url{font-size:clamp(16px,4vw,26px);color:var(--ac);letter-spacing:.06em;margin-top:4vh;opacity:0;animation:tin .6s 4.2s forwards}
+/* fork */
+.fork{display:flex;flex-direction:column;gap:3vh;margin-top:4.5vh}
+.path{border:1px solid var(--line);padding:3vh 5vw;opacity:0;transform:translateY(16px)}
+.path.in{animation:tin .55s forwards}
+.path.hot{border-color:var(--ac)}
+.path .ph{font-size:clamp(22px,6vw,40px);font-weight:700;text-transform:lowercase}
+.path.hot .ph{color:var(--ac)}
+.path .pd{font-size:clamp(13px,3.2vw,17px);color:var(--sub);margin-top:.8vh}
+/* split flow */
+.flow{margin-top:4.5vh}
+.frow{display:flex;align-items:center;gap:3vw;margin-top:2.6vh;opacity:0;transform:translateY(14px)}
+.frow.in{animation:tin .5s forwards}
+.frow .fb{border:1px solid var(--line);padding:1.6vh 4vw;font-size:clamp(15px,4vw,22px);white-space:nowrap}
+.frow .fa{color:var(--sub);font-size:clamp(18px,5vw,28px)}
+.frow .fv{color:var(--ac);font-weight:700;font-size:clamp(18px,5vw,28px)}
 </style>
 </head>
 <body>
-<div class="nav" id="nav">1 / 5 · tap to switch</div>
+<div class="nav" id="nav">1 / 10 · tap to switch</div>
 
-<!-- 1: every swipe has a cost -->
 <section class="card" data-c="1">
   <p class="tag"><b>●</b> FEE WATCH / LIVE</p>
   <h1 class="big">every swipe<br>has a <em>cost.</em></h1>
@@ -57,7 +84,6 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace
   <p class="wm"><b>[</b>targeted market<b>]</b></p>
 </section>
 
-<!-- 2: the real rate -->
 <section class="card" data-c="2">
   <p class="tag">NO 02 / <b>the statement lies</b></p>
   <p class="mid">what they think they pay</p>
@@ -69,7 +95,6 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace
   <p class="wm"><b>[</b>targeted market<b>]</b></p>
 </section>
 
-<!-- 3: 12k a year -->
 <section class="card" data-c="3">
   <p class="tag">NO 03 / <b>the leak</b></p>
   <div class="giant" id="leak">$0</div>
@@ -78,18 +103,16 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace
   <p class="wm"><b>[</b>targeted market<b>]</b></p>
 </section>
 
-<!-- 4: dual pricing drop -->
 <section class="card" data-c="4">
   <p class="tag">NO 04 / <b>the fix</b></p>
   <p class="mid">processing cost / month</p>
-  <div class="drop-old" id="old4">$1,000</div>
+  <div class="drop-old">$1,000</div>
   <div class="arrow">↓ dual pricing</div>
   <div class="drop-new">~$50 flat</div>
   <p class="disc">legal where properly disclosed · same model as every gas station</p>
   <p class="wm"><b>[</b>targeted market<b>]</b></p>
 </section>
 
-<!-- 5: the stack -->
 <section class="card" data-c="5">
   <p class="tag">NO 05 / <b>the residual</b></p>
   <h1 class="big">work once.<br><em>paid monthly.</em></h1>
@@ -102,17 +125,63 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace
   <p class="wm"><b>[</b>targeted market<b>]</b></p>
 </section>
 
+<section class="card" data-c="6">
+  <p class="tag">NO 06 / <b>the method</b></p>
+  <div>
+    <div class="mstep" data-i="0"><div class="mn">01 · 60 seconds</div><h2>read the statement.</h2><div class="mt">fees ÷ volume = the real rate. prove the loss.</div></div>
+    <div class="mstep" data-i="1"><div class="mn">02 · one afternoon</div><h2>install the fix.</h2><div class="mt">dual pricing. application. terminal. done.</div></div>
+    <div class="mstep" data-i="2"><div class="mn">03 · forever</div><h2>collect.</h2><div class="mt">~1% of every transaction. every month it processes.</div></div>
+  </div>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<section class="card" data-c="7">
+  <p class="tag">NO 07 / <b>processing 101 · free</b></p>
+  <h1 class="big">5 emails.<br>how money <em>actually</em> moves.</h1>
+  <div class="env" id="env">
+    <div class="e"></div><div class="e"></div><div class="e"></div><div class="e"></div><div class="e hot"></div>
+  </div>
+  <p class="mid">free. no spam. the education first.</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<section class="card" data-c="8">
+  <p class="tag">NO 08 / <b>the rate check</b></p>
+  <p class="mid">type two numbers. see the truth.</p>
+  <div style="margin-top:3vh"><span class="type" id="type8"></span></div>
+  <div class="real" style="animation-delay:3.2s">
+    <div class="giant" style="font-size:clamp(60px,16vw,150px)" id="rate8">2.31%</div>
+    <p class="mid">your real rate. not the one they printed.</p>
+  </div>
+  <p class="url">targetedmarket · /rate</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<section class="card" data-c="9">
+  <p class="tag">NO 09 / <b>two paths</b></p>
+  <h1 class="big">pick <em>one.</em></h1>
+  <div class="fork">
+    <div class="path" data-i="0"><div class="ph">keep walking past.</div><div class="pd">costs nothing. changes nothing. the fees keep flowing — just not to you.</div></div>
+    <div class="path hot" data-i="1"><div class="ph">open the file.</div><div class="pd">learn to spot it. fix it. collect 1% forever. $49/mo. cancel anytime.</div></div>
+  </div>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
+<section class="card" data-c="10">
+  <p class="tag">NO 10 / <b>sub-agents</b></p>
+  <h1 class="big">i show you<br>the <em>doors.</em></h1>
+  <div class="flow">
+    <div class="frow" data-i="0"><span class="fb">you walk</span><span class="fa">→</span><span class="fb">merchant boards</span></div>
+    <div class="frow" data-i="1"><span class="fb">merchant processes</span><span class="fa">→</span><span class="fv">residual splits</span></div>
+    <div class="frow" data-i="2"><span class="fb">every month</span><span class="fa">→</span><span class="fv">both of us. forever.</span></div>
+  </div>
+  <p class="disc">real training · real splits · results depend on your effort</p>
+  <p class="wm"><b>[</b>targeted market<b>]</b></p>
+</section>
+
 <script>
-var cur=1,max=5,timers=[];
-function clear(){timers.forEach(clearTimeout);timers=[];}
-function show(n){
-  clear();cur=n;
-  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('on')});
-  var card=document.querySelector('[data-c="'+n+'"]');
-  card.classList.add('on');
-  document.getElementById('nav').textContent=n+' / '+max+' · tap to switch';
-  if(n===1)c1();if(n===2)c2();if(n===3)c3();if(n===4)c4();if(n===5)c5();
-}
+var cur=1,max=10,timers=[];
+function clearT(){timers.forEach(clearTimeout);timers=[];}
 function later(f,ms){timers.push(setTimeout(f,ms))}
 function count(el,end,pre,suf,dur,dec){
   var t0=null;dec=dec||0;
@@ -121,32 +190,49 @@ function count(el,end,pre,suf,dur,dec){
     if(p<1)requestAnimationFrame(step);}
   requestAnimationFrame(step);
 }
-/* card 1: ticker rows appear then loop */
+function show(n){
+  clearT();cur=n;
+  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('on')});
+  document.querySelector('[data-c="'+n+'"]').classList.add('on');
+  document.getElementById('nav').textContent=n+' / '+max+' · tap to switch';
+  ({1:c1,2:c2,3:c3,4:c4,5:c5,6:c6,7:c7,8:c8,9:c9,10:c10})[n]();
+}
 function c1(){
   var rows=[["coffee shop","$18k/mo","−$360/mo"],["auto shop","$95k/mo","−$1,900/mo"],["med spa","$140k/mo","−$2,800/mo"],["barbershop","$22k/mo","−$440/mo"]];
   var el=document.getElementById('tick');el.innerHTML='';
-  rows.forEach(function(r,i){
-    later(function(){
-      var d=document.createElement('div');d.className='t-row';
-      d.innerHTML='<b>'+r[0]+'</b> · '+r[1]+' · <span class="l">'+r[2]+'</span>';
-      el.appendChild(d);
-    },600+i*900);
-  });
+  rows.forEach(function(r,i){later(function(){
+    var d=document.createElement('div');d.className='t-row';
+    d.innerHTML='<b>'+r[0]+'</b> · '+r[1]+' · <span class="l">'+r[2]+'</span>';el.appendChild(d);},600+i*900);});
   later(function(){if(cur===1)c1()},600+rows.length*900+2500);
 }
-/* card 2 */
 function c2(){later(function(){count(document.getElementById('rate2'),2.31,'','%',1400,2)},2500);later(function(){if(cur===2)c2()},7500);}
-/* card 3 */
 function c3(){later(function(){count(document.getElementById('leak'),12000,'$','',1800)},400);later(function(){if(cur===3)c3()},6500);}
-/* card 4 */
 function c4(){later(function(){if(cur===4)c4()},6500);}
-/* card 5 */
 function c5(){
-  document.querySelectorAll('.stack .s').forEach(function(s,i){
-    s.classList.remove('in');void s.offsetWidth;
-    later(function(){s.classList.add('in')},700+i*900);
-  });
-  later(function(){if(cur===5)c5()},700+3*900+3000);
+  document.querySelectorAll('.stack .s').forEach(function(s,i){s.classList.remove('in');void s.offsetWidth;later(function(){s.classList.add('in')},700+i*900);});
+  later(function(){if(cur===5)c5()},6400);
+}
+function c6(){
+  document.querySelectorAll('.mstep').forEach(function(s,i){s.classList.remove('in');void s.offsetWidth;later(function(){s.classList.add('in')},500+i*1300);});
+  later(function(){if(cur===6)c6()},500+3*1300+3200);
+}
+function c7(){
+  document.querySelectorAll('#env .e').forEach(function(e,i){e.classList.remove('in');void e.offsetWidth;later(function(){e.classList.add('in')},600+i*550);});
+  later(function(){if(cur===7)c7()},600+5*550+3200);
+}
+function c8(){
+  var el=document.getElementById('type8');el.textContent='';
+  var s='$50,000 · $1,155';var i=0;
+  later(function tick(){if(i<s.length&&cur===8){el.textContent+=s[i++];timers.push(setTimeout(tick,110));}},700);
+  later(function(){if(cur===8)c8()},9000);
+}
+function c9(){
+  document.querySelectorAll('.path').forEach(function(p,i){p.classList.remove('in');void p.offsetWidth;later(function(){p.classList.add('in')},700+i*1400);});
+  later(function(){if(cur===9)c9()},7200);
+}
+function c10(){
+  document.querySelectorAll('.frow').forEach(function(f,i){f.classList.remove('in');void f.offsetWidth;later(function(){f.classList.add('in')},600+i*1100);});
+  later(function(){if(cur===10)c10()},600+3*1100+3200);
 }
 document.body.addEventListener('click',function(){show(cur%max+1)});
 window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1));if(n>=1&&n<=max)show(n)});
