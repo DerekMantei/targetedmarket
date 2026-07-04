@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>targeted market / rate check</title>
+<meta name="description" content="Type two numbers from your statement. See what you actually pay to take cards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Jost:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#f4f1eb;--mu:#9a948a;--sub:#6b665e;--ac:#b08570;--line:#1d1d1d;--good:#7da87d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Space Mono",ui-monospace,Menlo,monospace;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column}
+::selection{background:var(--ac);color:#000}
+a{color:inherit;text-decoration:none}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);font-size:11px}
+.wm{font-family:"Jost",sans-serif;letter-spacing:.14em;font-size:14px}
+.wm .bk{color:var(--ac)}
+.bar a.pr{color:var(--ac)}
+main{flex:1;max-width:560px;width:100%;margin:0 auto;padding:40px 20px 60px}
+.tag{font-size:11px;letter-spacing:.28em;color:var(--sub);text-transform:uppercase;margin-bottom:18px}
+h1{font-size:clamp(30px,8vw,44px);line-height:1.02;font-weight:700;text-transform:lowercase;margin-bottom:14px}
+h1 em{font-style:italic;color:var(--ac)}
+.sub{color:var(--mu);font-size:14px;margin-bottom:38px}
+label{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin:26px 0 10px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-bottom:2px solid var(--sub);transition:border-color .2s}
+.inp:focus-within{border-bottom-color:var(--ac)}
+.inp span{padding:0 0 0 16px;color:var(--sub);font-size:20px}
+input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-family:inherit;font-size:26px;padding:16px 16px 16px 8px;width:100%}
+input::placeholder{color:#2e2b27}
+.hint{font-size:11px;color:var(--sub);margin-top:8px}
+.result{margin-top:44px;border:1px solid var(--line);opacity:0;transform:translateY(14px);transition:all .5s cubic-bezier(.19,1,.22,1);pointer-events:none}
+.result.on{opacity:1;transform:none;pointer-events:auto}
+.rate-big{padding:34px 24px;border-bottom:1px solid var(--line);text-align:center}
+.rate-big .n{font-size:clamp(52px,15vw,84px);font-weight:700;line-height:1;color:var(--ac)}
+.rate-big .l{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sub);margin-top:10px}
+.row{display:flex;justify-content:space-between;align-items:baseline;padding:16px 22px;border-bottom:1px solid var(--line);font-size:14px;color:var(--mu)}
+.row b{color:var(--ink);font-size:17px}
+.row.save b{color:var(--good);font-size:20px}
+.row:last-child{border-bottom:0}
+.note{font-size:10px;color:var(--sub);padding:14px 22px;border-top:1px solid var(--line);line-height:1.6;text-transform:uppercase;letter-spacing:.06em}
+.cta{display:block;text-align:center;margin-top:26px;padding:18px;border:1px solid var(--ac);color:var(--ac);font-size:14px;letter-spacing:.06em;transition:all .2s}
+.cta:hover{background:var(--ac);color:#000}
+.cta2{display:block;text-align:center;margin-top:12px;padding:14px;border:1px solid var(--line);color:var(--mu);font-size:12px}
+footer{border-top:1px solid var(--line);padding:20px;font-size:10px;color:var(--sub);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="wm" href="./"><span class="bk">[</span>targeted market<span class="bk">]</span></a>
+  <a class="pr" href="apply">the program</a>
+</header>
+
+<main>
+  <p class="tag">FIELD TOOL / RATE CHECK</p>
+  <h1>what do you <em>actually</em> pay?</h1>
+  <p class="sub">two numbers from last month's processing statement. that's it. the math happens in front of you — nothing is sent anywhere.</p>
+
+  <label for="vol">total card volume last month</label>
+  <div class="inp"><span>$</span><input id="vol" type="text" inputmode="numeric" placeholder="50,000" autocomplete="off"></div>
+  <p class="hint">every dollar you ran through cards</p>
+
+  <label for="fees">total fees on the statement</label>
+  <div class="inp"><span>$</span><input id="fees" type="text" inputmode="numeric" placeholder="1,000" autocomplete="off"></div>
+  <p class="hint">every fee line, added up — including the ones at the bottom</p>
+
+  <div class="result" id="res">
+    <div class="rate-big"><div class="n" id="rate">—</div><div class="l">your real effective rate</div></div>
+    <div class="row"><span>you paid last month</span><b id="paid">—</b></div>
+    <div class="row"><span>that's per year</span><b id="yearly">—</b></div>
+    <div class="row"><span>with dual pricing (flat)</span><b>~$50 / mo</b></div>
+    <div class="row save"><span>you'd keep, per year</span><b id="keep">—</b></div>
+    <p class="note">estimate based on the two numbers you entered. dual pricing must be properly disclosed — that's part of the setup. exact flat cost depends on the processor and terminal. nothing here is a guarantee.</p>
+  </div>
+
+  <a class="cta" id="cta" href="./#free" style="display:none">learn how money moves — 5 free lessons</a>
+  <a class="cta2" id="cta2" href="apply" style="display:none">or see the agent program →</a>
+</main>
+
+<footer>© 2026 / targeted market / arizona — educational, not financial advice</footer>
+
+<script>
+(function(){
+  var vol=document.getElementById('vol'),fees=document.getElementById('fees');
+  var fmt=function(n){return '$'+Math.round(n).toLocaleString()};
+  function clean(el){return parseFloat(el.value.replace(/[^0-9.]/g,''))||0}
+  function group(el){
+    var v=el.value.replace(/[^0-9]/g,'');
+    el.value=v?parseInt(v,10).toLocaleString():'';
+  }
+  function upd(){
+    group(vol);group(fees);
+    var v=clean(vol),f=clean(fees);
+    var res=document.getElementById('res');
+    if(v>0&&f>0&&f<v){
+      var r=f/v*100;
+      document.getElementById('rate').textContent=r.toFixed(2)+'%';
+      document.getElementById('paid').textContent=fmt(f);
+      document.getElementById('yearly').textContent=fmt(f*12);
+      document.getElementById('keep').textContent=fmt(Math.max(f*12-600,0));
+      res.classList.add('on');
+      document.getElementById('cta').style.display='block';
+      document.getElementById('cta2').style.display='block';
+    } else {res.classList.remove('on');}
+  }
+  vol.addEventListener('input',upd);fees.addEventListener('input',upd);
+})();
+</script>
+</body>
+</html>
