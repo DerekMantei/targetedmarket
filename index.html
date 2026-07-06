@@ -235,9 +235,8 @@ footer{border-top:1px solid var(--line);padding:36px 24px;display:flex;justify-c
     if(fd.get('bot-field')){return;}
     var email=fd.get('email'),name=fd.get('name')||'';
     var btn=f.querySelector('button');btn.disabled=true;btn.textContent='…';
-    /* 1. MailerLite — triggers Processing 101 drip */
-    var ml=new URLSearchParams();ml.set('fields[email]',email);ml.set('fields[name]',name);ml.set('ml-submit','1');ml.set('anticsrf','true');
-    var p1=fetch('https://assets.mailerlite.com/jsonp/2405457/forms/189307072349734556/subscribe',{method:'POST',body:ml}).catch(function(){});
+    /* capture → derek's inbox (interim while ESP migrates) */
+    var p1=fetch('https://formsubmit.co/ajax/derekmantei06@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:name,email:email,_subject:'processing 101 signup'})}).catch(function(){});
     Promise.all([p1]).then(function(){
       f.style.display='none';
       document.getElementById('optin-success').style.display='block';
