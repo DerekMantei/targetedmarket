@@ -1,0 +1,38 @@
+internal_name,label,object_type,field_type,options,required,notes
+relationship_type,Relationship Type,contact,dropdown,"Merchant Contact|Agent Candidate|Referral Partner|Vendor|Other",yes,Use to separate merchant and agent contacts
+lead_source,Lead Source,company,dropdown,"Door Walk|Cold Call|Cold Email|Referral|Instagram|Website|Content|Existing Relationship|Other",yes,Public acquisition source
+assigned_agent,Assigned Agent,company,text,,yes,Use HubSpot owner when additional seats exist
+business_city,Business City,company,text,,yes,
+industry_detail,Industry Detail,company,text,,yes,Plain-language business category
+location_count,Number of Locations,company,number,,no,
+current_pos,Current POS or Terminal,company,text,,no,Do not store credentials
+monthly_volume_band,Approximate Monthly Volume Band,deal,dropdown,"Unknown|Under $10k|$10k-$25k|$25k-$50k|$50k-$100k|$100k-$250k|$250k+",no,Band only until secure statement review
+card_present_band,Card-Present Percentage Band,deal,dropdown,"Unknown|Under 25%|25%-50%|50%-75%|75%-100%",no,
+current_pricing_model,Current Pricing Model,deal,dropdown,"Unknown|Flat Rate|Tiered|Interchange Plus|Dual Pricing|Cash Discount|Surcharge|Other",no,
+primary_pain_point,Primary Pain Point,deal,dropdown,"Unknown|Pricing|Equipment|Support|Deposits|Batching|Reporting|Integrations|Contract|Other",yes,
+first_contact_date,First Contact Date,deal,date,,no,
+last_contact_date,Last Contact Date,deal,date,,no,
+next_action,Next Action,deal,text,,yes,Every open record needs an observable action
+next_action_date,Next Action Date,deal,date,,yes,
+call_attempts,Call Attempts,deal,number,,no,
+conversation_count,Decision-Maker Conversations,deal,number,,no,
+followup_count,Follow-Ups Completed,deal,number,,no,
+do_not_contact,Do Not Contact,contact,boolean,,yes,Hard suppression field
+permission_to_text,Permission to Text,contact,boolean,,yes,Do not infer consent
+best_contact_time,Best Contact Time,contact,text,,no,
+statement_requested_date,Statement Requested Date,deal,date,,no,Do not upload statement to HubSpot
+statement_received_date,Statement Received Date,deal,date,,no,Status only
+analysis_completed_date,Analysis Completed Date,deal,date,,no,
+review_booked_date,Review Booked Date,deal,date,,no,
+proposal_presented_date,Proposal Presented Date,deal,date,,no,
+application_started_date,Application Started Date,deal,date,,no,
+application_submitted_date,Application Submitted Date,deal,date,,no,Status only; application stays in approved secure system
+approval_date,Approval Date,deal,date,,no,
+activation_date,Activation Date,deal,date,,no,
+thirty_day_review_date,Thirty-Day Review Date,deal,date,,no,
+retained_30_days,Retained at 30 Days,deal,boolean,,no,
+residual_verified,Residual Verified,deal,boolean,,no,Do not store exact confidential amount
+lost_reason,Lost or Disqualified Reason,deal,dropdown,"No Need|No Response|Stayed With Provider|Price|Contract|Trust|Not Qualified|Prohibited Business|Timing|Duplicate|Other",no,
+revisit_date,Revisit Date,deal,date,,no,
+public_source_url,Public Research Source,company,text,,no,Company website or public listing
+research_date,Research Date,company,date,,no,
